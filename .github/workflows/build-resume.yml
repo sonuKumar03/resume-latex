@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      RESUME: base_resume           # default .tex name without extension
-      OUTPUT: base_resume.pdf       # change if you want a different default
+      RESUME: src/base_resume           # default .tex name without extension
+      OUTPUT: pdf/base_resume.pdf       # change if you want a different default
 
     steps:
       - name: Checkout
