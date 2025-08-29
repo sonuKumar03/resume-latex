@@ -5,7 +5,7 @@ This repository contains my resume written in **LaTeX**, along with a simple Mak
 [![Resume PDF](https://img.shields.io/badge/PDF-Download-brightgreen?style=flat&logo=adobeacrobatreader)](./base_resume.pdf)
 
 ## Files
-- `sonu_resume.tex` — main LaTeX source file.
+- `base_resume.tex` — main LaTeX source file.
 - `Makefile` — build automation for compiling `.tex` into `.pdf`.
 - `.gitignore` — ignores LaTeX build artifacts.
 
