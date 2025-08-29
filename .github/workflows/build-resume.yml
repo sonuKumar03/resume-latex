@@ -1,62 +1,48 @@
-name: Build Resume PDF
+name: Build Resume PDFs
 
 on:
   push:
     branches: [ main ]
     paths:
-      - "**.tex"
+      - "src/**/*.tex"
       - "Makefile"
       - ".github/workflows/build-resume.yml"
   workflow_dispatch:
 
 permissions:
-  contents: write  # needed to commit the PDF back
+  contents: write  # required to commit PDFs back
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      RESUME: src/base_resume           # default .tex name without extension
-      OUTPUT: pdf/base_resume.pdf       # change if you want a different default
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install TeX Live (minimal set)
+      - name: Install TeX Live (minimal but enough for our .tex)
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            texlive-latex-base texlive-latex-recommended texlive-latex-extra \
-            texlive-fonts-recommended texlive-fonts-extra latexmk
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            latexmk make
 
-      # Optional cache for fonts/pkg db (speeds up subsequent builds)
-      - name: Cache TeX Live
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.texlive
-            ~/.cache/texmf
-          key: texlive-${{ runner.os }}-v1
+      # Build all .tex in src/ -> pdf/ (relies on your Makefile)
+      - name: Build PDFs into pdf/
+        run: make
 
-      - name: Build PDF (Makefile if present)
-        run: |
-          if [ -f Makefile ]; then
-            make pdf RESUME="$RESUME" OUTPUT="$OUTPUT"
-          else
-            latexmk -pdf -interaction=nonstopmode -halt-on-error "$RESUME.tex"
-            mv "$RESUME.pdf" "$OUTPUT"
-          fi
-
-      - name: Upload PDF artifact
+      - name: Upload PDFs as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: resume-pdf
-          path: ${{ env.OUTPUT }}
+          name: resumes-pdf
+          path: pdf/*.pdf
 
-      - name: Commit updated PDF back to repo
+      - name: Commit updated PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore(ci): update generated PDF (${{ env.OUTPUT }})"
-          file_pattern: ${{ env.OUTPUT }}
+          commit_message: "chore(ci): update generated PDFs in pdf/"
+          file_pattern: pdf/*.pdf
