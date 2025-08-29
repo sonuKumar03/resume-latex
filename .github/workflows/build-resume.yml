@@ -2,8 +2,7 @@ name: Build Resume PDFs
 
 on:
   push:
-    branches: [ main, master ]   # trigger on either default branch
-    # Broaden so normal changes trigger a run
+    branches: [ main, master ]
     paths:
       - '**.tex'
       - 'src/**'
@@ -22,25 +21,35 @@ on:
 permissions:
   contents: write
 
+# Prevent multiple redundant builds on quick successive pushes
+concurrency:
+  group: build-resume-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DEBIAN_FRONTEND: noninteractive
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install TeX Live (minimal but enough for our .tex)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            texlive-latex-base \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-fonts-extra \
-            texlive-lmodern \
-            latexmk make
+      # Cache apt packages to speed up TeX Live installs
+      # (This action restores cached .deb packages and installs them)
+      - name: Cache & install apt packages
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: >
+            texlive-latex-base
+            texlive-latex-recommended
+            texlive-latex-extra
+            texlive-fonts-recommended
+            texlive-fonts-extra
+            latexmk
+            make
+          version: 1
 
       - name: Clean old artifacts
         run: make clean || true
@@ -53,6 +62,8 @@ jobs:
         with:
           name: resumes-pdf
           path: pdf/*.pdf
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Commit updated PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
