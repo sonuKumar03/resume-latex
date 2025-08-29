@@ -28,10 +28,18 @@ pdf:
 %:
 	@$(MAKE) pdf RESUME=$@ OUTPUT=$@.pdf
 
+# Clean LaTeX aux/log files from OUT_DIR
 clean:
-	@rm -f $(OUT_DIR)/*.aux $(OUT_DIR)/*.log $(OUT_DIR)/*.out \
-	       $(OUT_DIR)/*.toc $(OUT_DIR)/*.fls $(OUT_DIR)/*.fdb_latexmk \
-	       $(OUT_DIR)/*.synctex.gz
+	@rm -f $(OUT_DIR)/*.aux \
+	       $(OUT_DIR)/*.log \
+	       $(OUT_DIR)/*.out \
+	       $(OUT_DIR)/*.toc \
+	       $(OUT_DIR)/*.fls \
+	       $(OUT_DIR)/*.fdb_latexmk \
+	       $(OUT_DIR)/*.synctex.gz \
+	       $(OUT_DIR)/*.bbl \
+	       $(OUT_DIR)/*.blg
 
+# Clean all (aux/log + PDFs)
 cleanall: clean
 	@rm -f $(OUT_DIR)/*.pdf
