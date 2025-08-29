@@ -2,7 +2,7 @@
 # Build defaults
 SRC_DIR ?= src
 OUT_DIR ?= pdf
-RESUME  ?= sonu_resume          # .tex base name (without extension)
+RESUME  ?= base_resume          # .tex base name (without extension)
 OUTPUT  ?= $(RESUME).pdf        # default pdf name matches tex base
 PDF_PATH := $(OUT_DIR)/$(OUTPUT)
 
