@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      RESUME: sonu_resume           # default .tex name without extension
-      OUTPUT: sonu_resume.pdf       # change if you want a different default
+      RESUME: base_resume           # default .tex name without extension
+      OUTPUT: base_resume.pdf       # change if you want a different default
 
     steps:
       - name: Checkout
