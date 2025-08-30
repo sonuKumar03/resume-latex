@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04   # reduce image churn vs ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       DEBIAN_FRONTEND: noninteractive
 
@@ -46,12 +46,11 @@ jobs:
             texlive-latex-extra
             texlive-fonts-recommended
             texlive-fonts-extra
-            texlive-lmodern
+            lmodern
             latexmk
             make
-          version: 2   # bump to refresh cache if needed
+          version: 2   # bump this if you change package list
 
-      # NEW: ensure formats exist on this runner
       - name: Ensure TeX formats exist
         run: |
           sudo mktexlsr
