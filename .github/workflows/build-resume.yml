@@ -21,14 +21,13 @@ on:
 permissions:
   contents: write
 
-# Prevent multiple redundant builds on quick successive pushes
 concurrency:
   group: build-resume-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04   # reduce image churn vs ubuntu-latest
     env:
       DEBIAN_FRONTEND: noninteractive
 
@@ -36,20 +35,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Cache apt packages to speed up TeX Live installs
-      # (This action restores cached .deb packages and installs them)
       - name: Cache & install apt packages
         uses: awalsh128/cache-apt-pkgs-action@v1
         with:
           packages: >
+            texlive-binaries
+            texlive-base
             texlive-latex-base
             texlive-latex-recommended
             texlive-latex-extra
             texlive-fonts-recommended
             texlive-fonts-extra
+            texlive-lmodern
             latexmk
             make
-          version: 1
+          version: 2   # bump to refresh cache if needed
+
+      # NEW: ensure formats exist on this runner
+      - name: Ensure TeX formats exist
+        run: |
+          sudo mktexlsr
+          sudo fmtutil-sys --byfmt pdflatex || sudo fmtutil-sys --all || true
+          fmtutil-user --byfmt pdflatex || fmtutil-user --all || true
+          kpsewhich pdflatex.fmt || true
 
       - name: Clean old artifacts
         run: make clean || true
