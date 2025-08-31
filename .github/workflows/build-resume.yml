@@ -35,28 +35,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache & install apt packages
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: >
-            texlive-binaries
-            texlive-base
-            texlive-latex-base
-            texlive-latex-recommended
-            texlive-latex-extra
-            texlive-fonts-recommended
-            texlive-fonts-extra
-            lmodern
-            latexmk
+      - name: Install TeX Live and tools
+        run: |
+          sudo apt-get update
+          # Install a LaTeX stack sufficient for pdflatex + common packages
+          sudo apt-get install -y --no-install-recommends \
+            texlive-binaries \
+            texlive-base \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            lmodern \
+            latexmk \
             make
-          version: 2   # bump this if you change package list
 
       - name: Ensure TeX formats exist
         run: |
           sudo mktexlsr
+          # Make sure pdflatex.fmt is available (create if missing)
           sudo fmtutil-sys --byfmt pdflatex || sudo fmtutil-sys --all || true
           fmtutil-user --byfmt pdflatex || fmtutil-user --all || true
-          kpsewhich pdflatex.fmt || true
+          echo "pdflatex version:" && pdflatex --version | head -n1
+          echo "pdflatex.fmt path:" && kpsewhich pdflatex.fmt || true
 
       - name: Clean old artifacts
         run: make clean || true
