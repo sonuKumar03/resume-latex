@@ -1,0 +1,214 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[pdftex,hidelinks]{hyperref}
+\usepackage{fancyhdr}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{4.1pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.375in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textbf{#3} & \textbf{#4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Large Sonu Kumar} & Email : \href{mailto:sonukumar03xt@gmail.com}{sonukumar03xt@gmail.com}\\
+  \href{https://www.linkedin.com/in/sonukumar03xt/}{LinkedIn} & Mobile: +91 - 9993044923 \\
+\end{tabular*}
+
+%-----------Summary-------------------
+\section{Summary}
+  \resumeSubHeadingListStart
+    \item[]{
+      Software Engineer with 5+ years of experience building scalable, maintainable, and high-performance web applications and Node.js systems.
+    }
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {SpotDraft}{}
+      {Software Engineer} { Jan 2023 -- Present}
+      \resumeItemListStart
+
+        \resumeItem{Review-AI (AI-powered contract review)}
+          {Led frontend development for Review-AI, an AI-powered legal contract review feature integrated into an enterprise Contract Lifecycle Management (CLM) platform.}
+
+        \resumeItem{Frontend Architecture}
+          {Designed scalable frontend architecture to handle large, complex legal documents with rich interactions, annotations, and metadata.}
+
+        \resumeItem{AI-driven Workflows}
+          {Built reusable UI components and workflows to visualize AI-generated insights, suggestions, and document diffs in a clear and actionable manner.}
+
+        \resumeItem{Performance Optimization}
+          {Optimized frontend performance and memory usage for long-running, document-heavy review sessions, preventing UI freezes and memory leaks.}
+
+        \resumeItem{Pluggable Frontend Modules}
+          {Architected a reusable, pluggable frontend module that could be seamlessly integrated across multiple web applications and Microsoft Office / OnlyOffice plugins.}
+
+        \resumeItem{Microsoft Word \& OnlyOffice Plugins}
+          {Designed and built high-performance, scalable plugins for Microsoft Word and OnlyOffice to support in-editor contract review and collaboration.}
+
+        \resumeItem{Large Document Processing}
+          {Optimized systems to handle very large legal contracts within web and plugin environments without impacting responsiveness.}
+
+        \resumeItem{Cross-team Collaboration}
+          {Collaborated closely with backend and ML teams to integrate AI responses into production-ready frontend workflows, and worked with PMs and designers to refine UX.}
+
+        \resumeItem{Product Impact}
+          {Revamped a high-traffic contract detail page, improving usability, engagement, and overall user experience for core customer workflows.}
+
+        \resumeItem{Engineering Initiatives}
+          {Reduced Angular build and serve time by 40\% through code splitting and refactoring; reduced bundle size by 39\% and improved First Contentful Paint (FCP) by 30\% across the frontend monorepo.}
+
+        \resumeItem{Developer Experience}
+          {Improved local and CI test execution time by 40\% by refactoring 300+ test files, reducing Jest memory usage, and removing performance bottlenecks.}
+
+        \resumeItem{Backend Optimization (Node.js)}
+          {Optimized performance and memory usage of CFExporter, a stateless Node.js document processing service, using worker threads and scalable coding practices, reducing on-call issues by ~90\%.}
+
+        \resumeItem{Tech Stack}
+          {TypeScript, JavaScript, Angular, HTML, CSS, SCSS, Node.js, Express, Nx, RxJS}
+
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Interbiz Consulting Pvt. Ltd.}{}
+      {Software Engineer}{Aug. 2020 -- Jan. 2023}
+      \resumeItemListStart
+
+        \resumeItem{EViewIOT Platform}
+          {Architected EViewIOT, a real-time IoT platform for monitoring and controlling 10,000+ online IoT devices with low-latency updates.}
+
+        \resumeItem{Reusable UI Systems}
+          {Built white-labeled, reusable, and pluggable UI components to support customization across multiple client deployments.}
+
+        \resumeItem{Complex Data Visualization}
+          {Designed and scaled a custom reusable table component supporting nested rows and dynamic columns for complex data representation.}
+
+        \resumeItem{Real-time Polling System}
+          {Developed a low-latency polling system using C\# and .NET to fetch device updates and reflect changes in the UI in near real time.}
+
+        \resumeItem{Performance Optimization}
+          {Optimized Angular applications using efficient change detection strategies and background processing to improve responsiveness.}
+
+        \resumeItem{Mentorship}
+          {Conducted code reviews and technical knowledge sharing for a team of 20+}
+
+        \resumeItem{Tech Stack}
+          {C\#, .NET, TypeScript, JavaScript, Angular, HTML, CSS, SCSS}
+
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+\section{Skills}
+  \resumeSubHeadingListStart
+    \resumeSubItem{Programming Languages}{ TypeScript, JavaScript,Python, C-sharp}
+    \resumeSubItem{Technical Skills:}{ Data structure and Algorithms, object-oriented programming, Functional Programming,
+      Performance Optimization, Chrome Dev-tools, Critical Debugging,Low-level design (LLD) and High-level Design (HLD).
+     }
+    \resumeSubItem{Development}{ Angular,RxJs, React, HTML, CSS, SCSS, Cursor, Figma, Jira, Git, VsCode , NxConsole, MonoRepo, Css-System, Metabase, Sentry, DataDog, }
+    \resumeSubItem{Platforms}{ Mac, Linux, Windows }
+  \resumeSubHeadingListEnd
+
+%-----------EDUCATION-----------------
+\section{Education}
+\vspace{-2pt}
+\begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+
+\textbf{Government Engineering College Bilaspur} & \textbf{2015 -- 2019} \\
+\textit{Bachelor of Technology, Information Technology; CGPA: 7.52} & \\[-2pt]
+
+\\[-6pt]
+
+\textbf{Jawahar Navodaya Vidyalaya Koriya, Chhattisgarh} & \textbf{2014 -- 2015} \\
+\textit{High School, Science; 86\%} & \\
+
+\end{tabular*}
+
+%-----------PROJECTS-----------------
+\section{Projects}
+  \resumeSubHeadingListStart
+
+    \resumeSubItem{Automobile Vehicle Servicing System -- Janta Garage}
+      {Built an end-to-end platform connecting vehicle owners with service providers, enabling service discovery, booking, and job management.}
+
+      \resumeItemListStart
+        \resumeItem{Web Platform}
+          {Developed a web application for service providers to list services, manage availability, and handle incoming service requests.}
+
+        \resumeItem{Mobile Application}
+          {Built a mobile application using React and React Native to allow users to place service orders and track service status.}
+
+        \resumeItem{Notification System}
+          {Implemented a reliable notification system to keep users and service providers informed of order updates and status changes.}
+
+        \resumeItem{Job Allocation System}
+          {Designed and implemented service job allocation and availability logic.}
+      \resumeItemListEnd
+
+      \resumeSubItem{Tech Stack}
+        {React, React Native, Firebase, JavaScript, TypeScript, Node.js, Bootstrap}
+
+  \resumeSubHeadingListEnd
+
+\end{document}
