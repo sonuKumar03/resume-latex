@@ -30,3 +30,8 @@
 *.bak
 *.tmp
 *~
+# Private / non-source files
+*.docx
+/*.pdf
+src/*.pdf
+.vscode/

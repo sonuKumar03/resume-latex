@@ -1,0 +1,15 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{resume-common}[2025/01/01 Shared contact details]
+
+\newcommand{\ContactName}{Sonu Kumar}
+\newcommand{\ContactEmail}{sonukumar03xt@gmail.com}
+\newcommand{\ContactPhone}{(+91) 99930 44923}
+\newcommand{\ContactLinkedIn}{https://www.linkedin.com/in/sonukumar03xt}
+\newcommand{\ContactLeetCode}{https://leetcode.com/sonukumar03xt}
+
+% \ContactLine{<separator>}: email, phone, LinkedIn, LeetCode (requires hyperref)
+\newcommand{\ContactLine}[1]{%
+  \href{mailto:\ContactEmail}{\ContactEmail}#1\ContactPhone#1%
+  \href{\ContactLinkedIn}{LinkedIn}#1\href{\ContactLeetCode}{LeetCode}}
+
+\endinput

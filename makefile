@@ -6,15 +6,28 @@ RESUME  ?= base_resume          # .tex base name (without extension)
 OUTPUT  ?= $(RESUME).pdf        # default pdf name matches tex base
 PDF_PATH := $(OUT_DIR)/$(OUTPUT)
 
-.PHONY: all pdf clean cleanall
+# Let \usepackage{resume-common} resolve to $(SRC_DIR)/resume-common.sty
+export TEXINPUTS := $(SRC_DIR):$(TEXINPUTS)
+
+.PHONY: all pdf check clean cleanall
 
 # Build ALL .tex in src/ -> pdf/
 all:
 	@mkdir -p $(OUT_DIR)
 	@for f in $(SRC_DIR)/*.tex; do \
 	  b=$$(basename $$f .tex); \
-	  $(MAKE) --no-print-directory pdf RESUME=$$b OUTPUT=$$b.pdf; \
+	  $(MAKE) --no-print-directory pdf RESUME=$$b OUTPUT=$$b.pdf || exit 1; \
 	done
+
+# Fail if any PDF in OUT_DIR exceeds its page limit (default 1; override below)
+check:
+	@command -v pdfinfo >/dev/null || { echo "pdfinfo not found (install poppler)"; exit 1; }
+	@fail=0; for f in $(OUT_DIR)/*.pdf; do \
+	  b=$$(basename $$f .pdf); \
+	  case $$b in front_end_resume|resume) max=2;; *) max=1;; esac; \
+	  n=$$(pdfinfo $$f | awk '/^Pages:/{print $$2}'); \
+	  if [ $$n -gt $$max ]; then echo "FAIL $$b: $$n pages (max $$max)"; fail=1; else echo "ok   $$b: $$n page(s)"; fi; \
+	done; exit $$fail
 
 # Build one resume (supports custom OUTPUT)
 pdf:
